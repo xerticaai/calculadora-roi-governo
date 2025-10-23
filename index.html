@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título atualizado para Governo -->
+    <title>Calculadora de ROI para IA no Governo | Xertica.ai</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Image Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" xintegrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibVocXFl+enL3ZeaNgGiDRUg3iGlrzkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        :root {
+            --brand-primary: #00C0FF;
+            --brand-accent: #FF00F3;
+            --text-strong: #1E1E1E;
+            --text-muted: #595959;
+            --text-light: #F0F0F0;
+            --bg-page: #ffffff;
+            --bg-soft: #F6F8FA;
+            --bg-hero: #F9F8FF;
+            --bg-dark: #121212;
+            --stroke: #E6E8EB;
+            --font-heading: 'Space Mono', monospace;
+            --font-body: 'Roboto', sans-serif;
+            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+            --space-sm: clamp(1rem, 2vw, 1.25rem);
+            --space-md: clamp(1.5rem, 3vw, 2rem);
+            --space-lg: clamp(2.5rem, 5vw, 4rem);
+            --space-xl: clamp(4rem, 8vw, 6rem);
+            --border-radius-sm: 8px;
+            --border-radius-md: 16px;
+            --transition-fast: 0.3s ease-out;
+            --container-width: 900px;
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-hero);
+            background-image: 
+                radial-gradient(circle at 100% 0%, rgba(255, 0, 243, 0.1), transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(0, 192, 255, 0.1), transparent 40%),
+                repeating-linear-gradient(rgba(240, 238, 252, 0.5) 0, rgba(240, 238, 252, 0.5) 1px, transparent 1px, transparent 50px),
+                repeating-linear-gradient(to right, rgba(240, 238, 252, 0.5) 0, rgba(240, 238, 252, 0.5) 1px, transparent 1px, transparent 50px);
+            color: var(--text-muted);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        main {
+            padding: var(--space-sm) var(--space-md) var(--space-xl) var(--space-md);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--text-strong);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; }
+        
+        .site-header {
+            padding: var(--space-md) 0;
+            width: 100%;
+            text-align: center;
+        }
+        .logo img { height: 30px; }
+
+        .calculator-card {
+            background-color: var(--bg-page);
+            border-radius: var(--border-radius-md);
+            padding: var(--space-lg);
+            border: 1px solid var(--stroke);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .calculator-card h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            line-height: 1.2;
+            margin-bottom: var(--space-xs);
+            text-align: center;
+        }
+
+        .calculator-card .subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            max-width: 60ch;
+            margin: 0 auto var(--space-lg) auto;
+            text-align: center;
+        }
+        
+        .form-title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: var(--space-lg);
+            border-bottom: 2px solid var(--stroke);
+            padding-bottom: var(--space-xs);
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            text-align: left;
+        }
+        .input-group label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--stroke);
+            font-size: 1rem;
+            transition: border-color var(--transition-fast);
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        /* CSS PARA A DESCRIÇÃO DO CAMPO */
+        .input-group .input-description {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: -5px; /* Puxa para perto do label */
+            margin-bottom: 8px; /* Afasta da caixa de input */
+            line-height: 1.4;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: clamp(0.9rem, 1.2vw, 1rem);
+            text-transform: uppercase;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+            background-size: 200% auto;
+            border: none;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 192, 255, 0.5);
+            background-position: right center;
+        }
+
+        #roi-warning {
+            display: none;
+            background-color: #fff9c4;
+            color: #7f5f00;
+            border: 1px solid #ffeb3b;
+            padding: var(--space-md);
+            border-radius: var(--border-radius-sm);
+            margin-top: var(--space-lg);
+            text-align: left;
+        }
+
+        #results-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--stroke);
+        }
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .btn-export {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 0.6rem 1.2rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            border: 1px solid var(--stroke);
+            background-color: var(--bg-soft);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .btn-export:hover {
+            background-color: var(--stroke);
+            color: var(--text-strong);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        .result-item {
+            background-color: var(--bg-soft);
+            padding: var(--space-md);
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+        }
+        .result-item .value {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            line-height: 1;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-accent), var(--brand-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .result-item .label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+        .result-item .description {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        
+        .financial-analysis {
+            background-color: var(--bg-soft);
+            border-radius: var(--border-radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        .analysis-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+        }
+        .analysis-row:not(:last-child) {
+            border-bottom: 1px dashed var(--stroke);
+        }
+        .analysis-row .label {
+            font-weight: 500;
+        }
+        .analysis-row .label .description {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+            font-weight: 400;
+            text-transform: none;
+        }
+        .analysis-row .value {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .analysis-row.total {
+            border-top: 2px solid var(--text-strong);
+            margin-top: var(--space-sm);
+        }
+        .analysis-row.total .label, .analysis-row.total .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-strong);
+        }
+
+        
+        .net-savings-card {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+            color: white;
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-md);
+            text-align: center;
+        }
+        .net-savings-card h3 { color: white; }
+        .net-savings-card .value { font-size: 3rem; font-weight: 700; font-family: var(--font-heading); text-transform: uppercase; }
+
+        .disclaimers {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--stroke);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: center;
+        }
+        .disclaimers p { margin-bottom: var(--space-xs); }
+        
+        .rules-container {
+            margin-top: var(--space-xl);
+        }
+        #rules-toggle {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 1rem;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            padding: var(--space-sm);
+            width: 100%;
+            justify-content: center;
+            border: 1px dashed var(--stroke);
+            border-radius: var(--border-radius-sm);
+        }
+        #rules-toggle .material-symbols-outlined {
+            transition: transform var(--transition-fast);
+        }
+        #rules-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out, margin 0.5s ease-out;
+            background-color: var(--bg-page);
+            border-radius: var(--border-radius-md);
+            padding: 0 var(--space-lg);
+            margin-top: 0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--stroke);
+        }
+        #rules-content.visible {
+            max-height: 2000px; 
+            padding: var(--space-lg);
+            margin-top: var(--space-md);
+        }
+        #rules-content h4 { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-sm); color: var(--text-strong); }
+        #rules-content ul { padding-left: 20px; }
+        #rules-content li { margin-bottom: var(--space-sm); }
+        #rules-content .capacity-table { font-size: 0.9rem; }
+
+
+        .site-footer {
+             padding: var(--space-sm) 0 var(--space-md) 0;
+             text-align: center;
+             font-size: 0.9rem;
+             color: var(--text-muted);
+        }
+
+        #render-container { position: absolute; left: -9999px; top: 0; background: white; z-index: -1; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="#"><img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" class="logo"></a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="calculator-card">
+                 <!-- TÍTULO ATUALIZADO -->
+                <h1>Calculadora de ROI para o Governo</h1>
+                <p class="subtitle">Quantifique o retorno financeiro do seu investimento em IA, transformando economia de tempo em resultados concretos para sua operação.</p>
+
+                <div id="calculator-inputs">
+                     <h2 class="form-title">DADOS DO RELATÓRIO</h2>
+                     <div class="input-grid">
+                         <div class="input-group">
+                             <label for="client_name">Nome do Cliente</label>
+                             <input type="text" id="client_name" placeholder="Ex: João Silva">
+                         </div>
+                         <div class="input-group">
+                              <label for="client_company">Órgão / Empresa</label>
+                              <!-- PLACEHOLDER ATUALIZADO -->
+                             <input type="text" id="client_company" placeholder="Ex: Prefeitura de SP">
+                         </div>
+                         <div class="input-group">
+                             <label for="seller_name">Consultor Xertica.ai</label>
+                             <input type="text" id="seller_name" placeholder="Seu nome">
+                         </div>
+                     </div>
+
+                     <h2 class="form-title">1. DADOS FINANCEIROS E DE ATIVIDADE</h2>
+                     <div class="input-grid">
+                         <div class="input-group">
+                             <label for="custo_servidor">Custo Mensal por Colaborador (R$)</label>
+                             <input type="number" id="custo_servidor" placeholder="Salário + Encargos">
+                         </div>
+                         <div class="input-group">
+                             <label for="numero_servidores">Quantidade de Colaboradores</label>
+                             <input type="number" id="numero_servidores" placeholder="Nº de pessoas nas tarefas">
+                         </div>
+                         <div class="input-group">
+                             <label for="investimento_ia">Valor do Investimento em IA (Anual)</label>
+                             <input type="number" id="investimento_ia" placeholder="Ex: 50000">
+                         </div>
+                     </div>
+
+                     <!-- SEÇÃO DE TAREFAS ATUALIZADA (GOVERNO) -->
+                     <h2 class="form-title">2. VOLUME MENSAL DE TAREFAS (TOTAL DA EQUIPE)</h2>
+                     <div class="input-grid">
+                        <div class="input-group">
+                            <label for="atendimentos">Atendimentos ao Cidadão por mês</label>
+                            <p class="input-description">Ex: Dúvidas por telefone, e-mail ou balcão sobre serviços e protocolos.</p>
+                            <input type="number" id="atendimentos" placeholder="Ex: 1000" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="analise_docs">Documentos Analisados por mês (Contratos)</label>
+                            <p class="input-description">Ex: Leitura de contratos, editais ou processos para extrair dados-chave.</p>
+                            <input type="number" id="analise_docs" placeholder="Ex: 200" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="geracao_docs">Documentos Gerados por mês (Licenças, Autos)</label>
+                            <p class="input-description">Ex: Emissão de licenças, autos de infração, certidões ou ofícios.</p>
+                            <input type="number" id="geracao_docs" placeholder="Ex: 500" min="0">
+                        </div>
+                         <div class="input-group">
+                            <label for="anonimizacao_docs">Documentos Anonimizados por mês (LGPD)</label>
+                            <p class="input-description">Ex: Remoção manual de dados (CPF, RG) para publicação (LGPD).</p>
+                            <input type="number" id="anonimizacao_docs" placeholder="Ex: 300" min="0">
+                        </div>
+                     </div>
+                     <button id="calculate-btn" class="btn">Calcular ROI</button>
+                     <div id="roi-warning"></div>
+                </div>
+
+                <!-- SEÇÃO DE RESULTADOS (LABELS ATUALIZADOS PARA LÍQUIDO) -->
+                <div id="results-section">
+                    <div class="results-header">
+                        <h2 id="results-title">Relatório de Retorno Sobre Investimento (ROI)</h2>
+                        <button id="save-png-btn" class="btn-export">
+                            <span class="material-symbols-outlined">image</span>
+                            Salvar como Imagem
+                        </button>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <span class="value" id="economia-mes">R$ 0</span>
+                            <span class="label">Economia Líquida Mensal</span>
+                            <p class="description">Valor líquido economizado por mês, já descontado o investimento (pro-rata).</p>
+                        </div>
+                        <div class="result-item">
+                            <span class="value" id="economia-ano">R$ 0</span>
+                            <span class="label">Economia Líquida Anual</span>
+                            <p class="description">Valor líquido economizado no primeiro ano, após pagar o investimento.</p>
+                        </div>
+                        <div class="result-item">
+                            <span class="value" id="roi">0%</span>
+                            <span class="label">Retorno Sobre Investimento (ROI)</span>
+                             <p class="description">Retorno gerado pelo investimento na solução de IA no primeiro ano.</p>
+                        </div>
+                         <div class="result-item">
+                            <span class="value" id="payback">0</span>
+                            <span class="label">Payback (Meses)</span>
+                             <p class="description">Tempo estimado para o investimento se pagar com a economia gerada.</p>
+                        </div>
+                    </div>
+
+                     <h3 style="text-align:center; margin-bottom: var(--space-md);">ANÁLISE FINANCEIRA DO 1º ANO</h3>
+                     <div class="financial-analysis">
+                         <div class="analysis-row">
+                             <div class="label">
+                                 Custo Operacional Atual
+                                 <span class="description">(Custo anual estimado das horas manuais)</span>
+                             </div>
+                             <span class="value" id="current-cost-value">R$ 0,00</span>
+                         </div>
+                         <div class="analysis-row">
+                              <div class="label">
+                                 <span class="material-symbols-outlined" style="color: var(--brand-primary);">remove</span>
+                                 Economia Anual com IA
+                                 <span class="description">(Valor anual economizado com automação)</span>
+                             </div>
+                             <span class="value" id="savings-value">R$ 0,00</span>
+                         </div>
+                         <div class="analysis-row">
+                             <div class="label">
+                                 <span class="material-symbols-outlined" style="color: var(--brand-accent);">add</span>
+                                 Investimento em IA
+                                 <span class="description">(Custo da solução no 1º ano)</span>
+                             </div>
+                             <span class="value" id="investment-value">R$ 0,00</span>
+                         </div>
+                         <div class="analysis-row total">
+                             <span class="label">Novo Custo Operacional (Anual)</span>
+                             <span class="value" id="new-cost-value">R$ 0,00</span>
+                         </div>
+                    </div>
+
+                    <div class="net-savings-card">
+                         <h3>Economia Líquida no 1º Ano</h3>
+                         <span class="value" id="net-savings-value">R$ 0,00</span>
+                    </div>
+
+                     <div class="disclaimers">
+                         <p><strong>*Disclaimer:</strong> Esta calculadora oferece estimativas baseadas nos dados fornecidos e na metodologia da Xertica.ai. Os resultados não são uma garantia e podem variar. Para uma análise detalhada e personalizada, consulte seu consultor Xertica.ai.</p>
+                         <p><strong>**Nota sobre ROI:</strong> O cálculo de ROI apresentado não inclui custos indiretos como consumo de infraestrutura tecnológica do cliente ou outros fatores externos que podem impactar o custo total.</p>
+                     </div>
+                </div>
+                
+                <!-- SEÇÃO DE REGRAS ATUALIZADA (GOVERNO) -->
+                 <div class="rules-container">
+                     <button id="rules-toggle">
+                         <span>Entenda o Cálculo</span>
+                         <span class="material-symbols-outlined">expand_more</span>
+                     </button>
+                     <div id="rules-content">
+                         <div class="results-header" style="margin-bottom: var(--space-md);">
+                             <h3>Metodologia de Cálculo</h3>
+                             <button id="save-rules-png-btn" class="btn-export">
+                                 <span class="material-symbols-outlined">image</span>
+                                 Baixar Regras como Imagem
+                             </button>
+                         </div>
+                         <p>A calculadora traduz a economia de tempo em um retorno financeiro claro, baseada em premissas realistas e na eficiência comprovada da nossa IA. Veja o passo a passo:</p>
+                         
+                         <h4>1. PREMISSAS DE TEMPO (MANUAL VS. IA)</h4>
+                         <p>Estes são os tempos médios que usamos como base para cada tarefa:</p>
+                          <!-- TABELA ATUALIZADA (GOVERNO) -->
+                         <table class="capacity-table" style="font-size: 0.9rem; margin-top: var(--space-sm);">
+                             <thead>
+                                 <tr>
+                                     <th>Tarefa</th>
+                                     <th>Tempo Manual Estimado</th>
+                                     <th>Tempo com IA Xertica.ai</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <tr>
+                                     <td>1 Atendimento ao Cidadão</td>
+                                     <td>15 minutos</td>
+                                     <td style="color: var(--brand-primary); font-weight: 700;">0 minutos (Autônomo)</td>
+                                 </tr>
+                                 <tr>
+                                     <td>1 Análise de Documento</td>
+                                     <td>1 hora (60 min)</td>
+                                     <td style="color: var(--brand-primary); font-weight: 700;">6 minutos</td>
+                                 </tr>
+                                 <tr>
+                                     <td>1 Geração de Documento</td>
+                                     <td>45 minutos</td>
+                                     <td style="color: var(--brand-primary); font-weight: 700;">4 minutos</td>
+                                 </tr>
+                                 <tr>
+                                     <td>1 Anonimização de Documento</td>
+                                     <td>20 minutos</td>
+                                     <td style="color: var(--brand-primary); font-weight: 700;">1 minuto</td>
+                                 </tr>
+                             </tbody>
+                         </table>
+
+                         <h4>2. CÁLCULO DA ECONOMIA DE TEMPO E CUSTO</h4>
+                         <ul>
+                             <li><b>Custo da Hora de Trabalho:</b> Dividimos o <code>Custo Mensal por Colaborador</code> por <code>168</code> (média de horas úteis no mês) para encontrar o valor de uma hora.</li>
+                             <li><b>Horas Manuais Gastas:</b> Multiplicamos o volume de cada tarefa que você inseriu pelo seu respectivo tempo manual. A soma de tudo nos dá o total de horas que sua equipe gasta hoje.</li>
+                             <li><b>Horas Economizadas com IA:</b> Calculamos o tempo total que seria gasto com IA e subtraímos do tempo manual total. O resultado é a quantidade de horas que sua equipe "ganha de volta" todo mês.</li>
+                         </ul>
+
+                         <h4>3. CÁLCULO DO IMPACTO FINANCEIRO</h4>
+                         <ul>
+                             <!-- ATUALIZADO PARA ECONOMIA BRUTA -->
+                             <li><b>Economia Anual Bruta (R$):</b> Convertemos as horas economizadas em valor financeiro (<code>Total de Horas Economizadas no Mês * Custo da Hora * 12</code>).</li>
+                              <li><b>Custo Operacional Atual:</b> É o custo anual estimado para realizar o volume de tarefas informado de forma manual (<code>Total de Horas Manuais no Mês * Custo da Hora * 12</code>).</li>
+                              <li><b>Economia Líquida (1º Ano):</b> É o lucro real após subtrair o investimento da economia gerada (<code>Economia Anual Bruta - Investimento em IA</code>).</li>
+                         </ul>
+
+                         <h4>4. MÉTRICAS DE INVESTIMENTO</h4>
+                         <ul>
+                             <li><b>ROI (Retorno Sobre o Investimento):</b> Mostra o retorno <strong>líquido</strong> sobre o valor investido no primeiro ano (<code>(Economia Líquida / Investimento) * 100</code>).</li>
+                             <li><b>Payback (Meses):</b> Indica em quantos meses o investimento se paga com a economia mensal <strong>bruta</strong> gerada (<code>Investimento / (Economia Anual Bruta / 12)</code>).</li>
+                         </ul>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2024 Xertica.ai. Todos os direitos reservados.</p>
+    </footer>
+
+    <div id="render-container"></div>
+
+    <!-- SCRIPT ATUALIZADO (GOVERNO + LÓGICA ROI CORRIGIDA) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resultsSection = document.getElementById('results-section');
+            const savePngBtn = document.getElementById('save-png-btn');
+            const roiWarning = document.getElementById('roi-warning');
+            const rulesToggle = document.getElementById('rules-toggle');
+            const rulesContent = document.getElementById('rules-content');
+            const saveRulesPngBtn = document.getElementById('save-rules-png-btn');
+            
+            const allInputs = document.querySelectorAll('#calculator-inputs input');
+
+            // PREMISSAS ATUALIZADAS (GOVERNO)
+            const temposManuais = { atendimento: 15, analise: 60, geracao: 45, anonimizacao: 20 };
+            const temposIA = { atendimento: 0, analise: 6, geracao: 4, anonimizacao: 1 };
+            const HORAS_TRABALHO_MES = 168;
+
+            const formatCurrency = (num) => `R$ ${num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            const formatPercent = (num) => `${num.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}%`;
+            const formatMonths = (num) => num > 0 ? `${num.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}` : 'N/A';
+
+            function calculateAndDisplay() {
+                const custoServidor = Number(document.getElementById('custo_servidor').value) || 0;
+                const investimentoIA = Number(document.getElementById('investimento_ia').value) || 0;
+                
+                // IDs DAS TAREFAS ATUALIZADOS (GOVERNO)
+                const qtdTarefas = {
+                    atendimento: Number(document.getElementById('atendimentos').value) || 0,
+                    analise: Number(document.getElementById('analise_docs').value) || 0,
+                    geracao: Number(document.getElementById('geracao_docs').value) || 0,
+                    anonimizacao: Number(document.getElementById('anonimizacao_docs').value) || 0,
+                };
+
+                const custoHora = custoServidor > 0 ? custoServidor / HORAS_TRABALHO_MES : 0;
+                
+                // LÓGICA DE CÁLCULO ATUALIZADA (GOVERNO)
+                const totalMinutosManuaisMes = (qtdTarefas.atendimento * temposManuais.atendimento) + (qtdTarefas.analise * temposManuais.analise) + (qtdTarefas.geracao * temposManuais.geracao) + (qtdTarefas.anonimizacao * temposManuais.anonimizacao);
+                const totalMinutosIAMes = (qtdTarefas.atendimento * temposIA.atendimento) + (qtdTarefas.analise * temposIA.analise) + (qtdTarefas.geracao * temposIA.geracao) + (qtdTarefas.anonimizacao * temposIA.anonimizacao);
+
+                const horasManuaisTotaisMes = totalMinutosManuaisMes / 60;
+                const horasEconomizadasMes = (totalMinutosManuaisMes - totalMinutosIAMes) / 60;
+                
+                const custoOperacionalAnual = (horasManuaisTotaisMes * custoHora) * 12;
+                // --- CÁLCULOS FINANCEIROS CORRIGIDOS ---
+                const economiaMensalBruta = horasEconomizadasMes * custoHora;
+                const economiaAnualBruta = economiaMensalBruta * 12;
+
+                const economiaLiquidaAnual = economiaAnualBruta - investimentoIA;
+                const economiaMensalLiquida = economiaLiquidaAnual / 12;
+                
+                const payback = economiaMensalBruta > 0 ? investimentoIA / economiaMensalBruta : 0; 
+                const roi = investimentoIA > 0 ? (economiaLiquidaAnual / investimentoIA) * 100 : 0;
+                // --- FIM DA CORREÇÃO ---
+
+                const novoCustoOperacional = (custoOperacionalAnual - economiaAnualBruta) + investimentoIA;
+                
+                // --- ATUALIZAÇÃO DO DISPLAY ---
+                document.getElementById('economia-mes').textContent = formatCurrency(economiaMensalLiquida);
+                document.getElementById('economia-ano').textContent = formatCurrency(economiaLiquidaAnual);
+                document.getElementById('roi').textContent = formatPercent(roi);
+                document.getElementById('payback').textContent = formatMonths(payback);
+
+                document.getElementById('current-cost-value').textContent = formatCurrency(custoOperacionalAnual);
+                document.getElementById('savings-value').textContent = formatCurrency(economiaAnualBruta);
+                document.getElementById('investment-value').textContent = formatCurrency(investimentoIA);
+                document.getElementById('new-cost-value').textContent = formatCurrency(novoCustoOperacional);
+                document.getElementById('net-savings-value').textContent = formatCurrency(economiaLiquidaAnual); 
+
+                if (payback > 12 && investimentoIA > 0) {
+                    roiWarning.style.display = 'block';
+                    roiWarning.innerHTML = `<strong>ATENÇÃO:</strong> O payback (retorno) do investimento ocorrerá em mais de 12 meses (<code>${formatMonths(payback)} meses</code>). O ROI de <strong style="color: #000;">${formatPercent(roi)}</strong> representa o retorno líquido já no primeiro ano.`;
+                } else {
+                    roiWarning.style.display = 'none';
+                }
+            }
+
+            calculateBtn.addEventListener('click', () => {
+                calculateAndDisplay();
+                resultsSection.style.display = 'block';
+                setTimeout(() => {
+                    resultsSection.style.opacity = '1';
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 10);
+            });
+
+            allInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (resultsSection.style.display === 'block') {
+                        calculateAndDisplay();
+                    }
+                });
+            });
+            
+            // --- FUNÇÕES PARA GERAR IMAGEM ---
+            function generateReportHTML() {
+                const clientName = document.getElementById('client_name').value || 'Cliente';
+                const clientCompany = document.getElementById('client_company').value || 'Empresa';
+                const sellerName = document.getElementById('seller_name').value || 'Consultor Xertica.ai';
+                const reportDate = new Date().toLocaleDateString('pt-BR');
+                
+                const resultsClone = document.getElementById('results-section').cloneNode(true);
+                const exportButton = resultsClone.querySelector('.btn-export');
+                if (exportButton) exportButton.remove();
+
+                const reportHTML = `
+                    <div style="padding: 40px; font-family: 'Roboto', sans-serif; color: #393232; width: 8.5in; background: white;">
+                        <style>
+                             h1, h2, h3 { font-family: 'Space Mono', monospace; text-transform: uppercase; color: #1E1E1E; }
+                            .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+                            .result-item { background-color: #F6F8FA; padding: 15px; border-radius: 8px; text-align: center; }
+                            .result-item .value { font-family: 'Space Mono', monospace; font-size: 28px; font-weight: 700; background: linear-gradient(90deg, #FF00F3, #00C0FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+                            .result-item .label { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+                            .result-item .description { font-size: 10px; color: #595959; line-height: 1.4; margin-top: 5px; }
+                            .financial-analysis { background-color: #F6F8FA; border-radius: 16px; padding: 24px; }
+                            .analysis-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+                            .analysis-row:not(:last-child) { border-bottom: 1px dashed #E6E8EB; }
+                            .analysis-row .label { font-weight: 500; font-size: 14px;}
+                            .analysis-row .label .description { font-size: 10px; color: #595959; display: block; font-weight: 400; text-transform: none; }
+                            .analysis-row .value { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; }
+                            .analysis-row.total { border-top: 2px solid #1E1E1E; margin-top: 8px; }
+                            .analysis-row.total .label, .analysis-row.total .value { font-size: 14px; font-weight: 700; color: #1E1E1E; }
+                            .net-savings-card { background: linear-gradient(135deg, #00C0FF, #FF00F3); color: white; padding: 20px; border-radius: 16px; text-align: center; margin-top: 20px;}
+                            .net-savings-card h3 { color: white; }
+                            .net-savings-card .value { font-size: 32px; font-weight: 700; font-family: 'Space Mono', monospace; text-transform: uppercase; }
+                            .disclaimers { margin-top: 30px; padding-top: 15px; border-top: 1px solid #E6E8EB; font-size: 10px; color: #595959; line-height: 1.5; text-align: center; }
+                            .disclaimers p { margin-bottom: 5px; }
+                        </style>
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" style="height: 30px;" crossorigin="anonymous">
+                        </div>
+                        <div style="text-align: center; border-bottom: 1px solid #E6E8EB; padding-bottom: 20px; margin-bottom: 20px;">
+                            <h1 style="font-size: 20px; margin: 0 0 8px 0;">RELATÓRIO DE RETORNO SOBRE INVESTIMENTO</h1>
+                             <p style="font-size: 14px; margin: 0;">Preparado para: <strong>${clientName} (${clientCompany})</strong></p>
+                            <p style="font-size: 12px; margin: 4px 0 0 0;">Consultor: ${sellerName} | Data: ${reportDate}</p>
+                        </div>
+                        <div>
+                            ${resultsClone.innerHTML}
+                        </div>
+                    </div>
+                `;
+                return reportHTML;
+            }
+            
+            savePngBtn.addEventListener('click', () => {
+                if (resultsSection.style.display === 'none') { console.warn('Gere um relatório antes de salvar.'); return; }
+                const renderContainer = document.getElementById('render-container');
+                renderContainer.innerHTML = generateReportHTML();
+                
+                const elementToCapture = renderContainer.firstElementChild;
+                
+                html2canvas(elementToCapture, { scale: 3, useCORS: true, allowTaint: true }).then(canvas => {
+                    const clientCompanyInput = document.getElementById('client_company');
+                    const clientCompany = clientCompanyInput ? clientCompanyInput.value : 'xertica';
+                    const link = document.createElement('a');
+                    // Nome do arquivo atualizado
+                    link.download = `relatorio_roi_ia_governo_${clientCompany.replace(/\s+/g, '_')}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+
+            rulesToggle.addEventListener('click', () => {
+                rulesContent.classList.toggle('visible');
+                const icon = rulesToggle.querySelector('.material-symbols-outlined');
+                const isVisible = rulesContent.classList.contains('visible');
+                icon.textContent = isVisible ? 'expand_less' : 'expand_more';
+                icon.style.transform = isVisible ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+
+            saveRulesPngBtn.addEventListener('click', () => {
+                const rulesElement = document.getElementById('rules-content');
+                const rulesHTML = rulesElement.innerHTML;
+                
+                const reportHTML = `
+                    <div style="padding: 40px; font-family: 'Roboto', sans-serif; color: #393232; width: 8.5in; background: white; text-align: left;">
+                         <style>
+                             h3, h4 { font-family: 'Space Mono', monospace; text-transform: uppercase; color: #1E1E1E; }
+                            h4 { font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+                            p { font-size: 0.9rem; line-height: 1.8; margin: 0.5rem 0; }
+                            ul { list-style-position: inside; padding-left: 20px; font-size: 0.9rem; line-height: 1.8; }
+                            li { margin-bottom: 0.5rem; }
+                            .capacity-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem; }
+                            .capacity-table th, .capacity-table td { padding: 10px; border-bottom: 1px solid #E6E8EB; text-align: left;}
+                            .capacity-table thead tr { background: linear-gradient(90deg, #00C0FF, #FF00F3); color: white; font-family: 'Space Mono', monospace; }
+                            .results-header { display: flex; justify-content: space-between; align-items: center; }
+                         </style>
+                         <div style="text-align: center; margin-bottom: 30px;">
+                            <img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" style="height: 30px;" crossorigin="anonymous">
+                         </div>
+                         ${rulesHTML}
+                    </div>
+                `;
+                
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = reportHTML;
+                const btnToRemove = tempDiv.querySelector('.btn-export');
+                if (btnToRemove) btnToRemove.remove();
+
+                const renderContainer = document.getElementById('render-container');
+                renderContainer.innerHTML = tempDiv.innerHTML;
+                const elementToCapture = renderContainer.firstElementChild;
+                
+                html2canvas(elementToCapture, { scale: 3, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+                    const link = document.createElement('a');
+                     // Nome do arquivo atualizado
+                    link.download = `regras_calculo_roi_governo.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
