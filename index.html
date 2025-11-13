@@ -6,31 +6,34 @@
     <!-- Título atualizado para Governo -->
     <title>Calculadora de ROI para IA no Governo | Xertica.ai</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts ATUALIZADAS (Poppins e Roboto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Material Symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Material Symbols --><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
-    <!-- Image Generation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" xintegrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibVocXFl+enL3ZeaNgGiDRUg3iGlrzkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Image Generation Library --><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" xintegrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibVocXFl+enL3ZeaNgGiDRUg3iGlrzkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
+        /* Variáveis de cor ATUALIZADAS para o Dark Mode */
         :root {
-            --brand-primary: #00C0FF;
-            --brand-accent: #FF00F3;
-            --text-strong: #1E1E1E;
-            --text-muted: #595959;
+            --brand-primary: #00BEFF; /* Primary 50 */
+            --brand-accent: #C0FF7D; /* Green 50 (novo accent) */
+            --brand-primary-dark: #047EA9; /* Primary 100 (para PNG) */
+            --text-strong: #FFFFFF; /* Texto forte (branco) */
+            --text-muted: #94a3b8; /* Texto suave (slate-400) */
             --text-light: #F0F0F0;
-            --bg-page: #ffffff;
-            --bg-soft: #F6F8FA;
-            --bg-hero: #F9F8FF;
-            --bg-dark: #121212;
-            --stroke: #E6E8EB;
-            --font-heading: 'Space Mono', monospace;
+            --bg-page: #1E293B; /* Fundo do card (slate-800) */
+            --bg-soft: rgba(51, 65, 85, 0.5); /* Fundo suave (slate-700/50) */
+            --bg-hero: #0F172A; /* Cor de fundo da página (slate-900) */
+            --bg-dark: #0F172A;
+            --stroke: rgba(51, 65, 85, 0.5); /* Borda (slate-700/50) */
+            
+            /* Fontes ATUALIZADAS */
+            --font-heading: 'Poppins', sans-serif;
             --font-body: 'Roboto', sans-serif;
+            
             --space-xs: clamp(0.5rem, 1vw, 0.75rem);
             --space-sm: clamp(1rem, 2vw, 1.25rem);
             --space-md: clamp(1.5rem, 3vw, 2rem);
@@ -47,53 +50,84 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
 
+        /* Estilo do BODY ATUALIZADO com fundo dark mode */
         body {
             font-family: var(--font-body);
-            background-color: var(--bg-hero);
-            background-image: 
-                radial-gradient(circle at 100% 0%, rgba(255, 0, 243, 0.1), transparent 40%),
-                radial-gradient(circle at 0% 100%, rgba(0, 192, 255, 0.1), transparent 40%),
-                repeating-linear-gradient(rgba(240, 238, 252, 0.5) 0, rgba(240, 238, 252, 0.5) 1px, transparent 1px, transparent 50px),
-                repeating-linear-gradient(to right, rgba(240, 238, 252, 0.5) 0, rgba(240, 238, 252, 0.5) 1px, transparent 1px, transparent 50px);
+            background-color: var(--bg-hero); /* Fallback */
+            background-image: url('https://i.imgur.com/dULOC88.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: var(--text-muted);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         main {
-            padding: var(--space-sm) var(--space-md) var(--space-xl) var(--space-md);
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-start; /* Alinha card ao topo */
+            justify-content: center;
+            padding: var(--space-md) var(--space-md) var(--space-xl) var(--space-md);
         }
 
+        /* Títulos ATUALIZADOS (sem uppercase) */
         h1, h2, h3, h4 {
             font-family: var(--font-heading);
             color: var(--text-strong);
             font-weight: 700;
-            text-transform: uppercase;
         }
-
-        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; }
-        
-        .site-header {
-            padding: var(--space-md) 0;
-            width: 100%;
-            text-align: center;
-        }
-        .logo img { height: 30px; }
-
-        .calculator-card {
-            background-color: var(--bg-page);
-            border-radius: var(--border-radius-md);
-            padding: var(--space-lg);
-            border: 1px solid var(--stroke);
-            box-shadow: var(--shadow-lg);
-        }
-
         .calculator-card h1 {
+            color: white; 
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             line-height: 1.2;
             margin-bottom: var(--space-xs);
             text-align: center;
         }
+
+        .container { width: 100%; max-width: var(--container-width); margin: 0 auto; }
+        
+        .site-header {
+            padding: var(--space-sm) 0; 
+            width: 100%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .header-container {
+             width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--space-md); 
+             display: flex; 
+             align-items: center; 
+             justify-content: center; 
+        }
+        /* Classe "logo" movida para o <a> */
+        .logo {
+            display: inline-block;
+        }
+        .logo img { 
+            height: 30px; 
+            display: block; 
+            transform: translateY(3px);
+        } 
+
+        /* Estilo do CARD ATUALIZADO (com borda de gradiente) */
+        .calculator-card {
+            background-color: var(--bg-page);
+            border-radius: var(--border-radius-md);
+            padding: var(--space-lg);
+            border: 2px solid transparent;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image: 
+                linear-gradient(to right, var(--bg-page), var(--bg-page)), /* Fundo (slate-800) */
+                linear-gradient(135deg, var(--brand-primary), var(--brand-accent)); /* Borda (Blue-to-Green) */
+            box-shadow: 0 0 15px rgba(0, 190, 255, 0.1); 
+        }
+
 
         .calculator-card .subtitle {
             font-size: clamp(1rem, 1.5vw, 1.1rem);
@@ -105,7 +139,6 @@
         .form-title {
             font-family: var(--font-heading);
             font-size: 1rem;
-            text-transform: uppercase;
             color: var(--text-muted);
             margin-bottom: var(--space-lg);
             border-bottom: 2px solid var(--stroke);
@@ -124,6 +157,7 @@
             font-size: 0.9rem;
             display: block;
             margin-bottom: var(--space-xs);
+            color: var(--text-strong);
         }
         .input-group input {
             width: 100%;
@@ -132,13 +166,19 @@
             border: 2px solid var(--stroke);
             font-size: 1rem;
             transition: border-color var(--transition-fast);
+            background-color: var(--bg-dark);
+            color: var(--text-strong);
+        }
+        .input-group input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.5;
         }
         .input-group input:focus {
             outline: none;
             border-color: var(--brand-primary);
         }
-
-        /* CSS PARA A DESCRIÇÃO DO CAMPO */
+        
+        /* CSS PARA A DESCRIÇÃO DO CAMPO (Governo) */
         .input-group .input-description {
             font-size: 0.85rem;
             font-weight: 400;
@@ -148,38 +188,59 @@
             line-height: 1.4;
         }
 
+        /* Legenda para premissas */
+        .premissas-legend {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 5px;
+        }
+        .premissas-legend span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            flex-basis: 50%;
+            text-align: center;
+        }
+
+        /* Estilo do BOTÃO ATUALIZADO (sólido, sem uppercase) */
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
             font-family: var(--font-heading);
             font-weight: 700;
             font-size: clamp(0.9rem, 1.2vw, 1rem);
-            text-transform: uppercase;
-            border-radius: 50px;
+            border-radius: var(--border-radius-sm);
             text-decoration: none;
             color: white;
-            background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
-            background-size: 200% auto;
+            background: var(--brand-primary);
             border: none;
             transition: all var(--transition-fast);
             cursor: pointer;
         }
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 192, 255, 0.5);
-            background-position: right center;
+            filter: brightness(1.1);
         }
 
+        /* Aviso de ROI ATUALIZADO (dark mode) */
         #roi-warning {
             display: none;
-            background-color: #fff9c4;
-            color: #7f5f00;
-            border: 1px solid #ffeb3b;
+            background-color: rgba(250, 239, 199, 0.1); /* Amarelo escuro translúcido */
+            color: #FEF08A; /* Texto amarelo claro */
+            border: 1px solid #EAB308; /* Borda amarela */
             padding: var(--space-md);
             border-radius: var(--border-radius-sm);
             margin-top: var(--space-lg);
             text-align: left;
         }
+        #roi-warning strong {
+            color: #FEF08A;
+        }
+        #roi-warning code {
+            background-color: rgba(0,0,0,0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
 
         #results-section {
             display: none;
@@ -198,6 +259,7 @@
             margin-bottom: var(--space-lg);
         }
         
+        /* Estilo do BOTÃO EXPORTAR ATUALIZADO */
         .btn-export {
             display: flex;
             align-items: center;
@@ -207,15 +269,15 @@
             font-weight: 700;
             font-size: 0.9rem;
             border-radius: 50px;
-            border: 1px solid var(--stroke);
-            background-color: var(--bg-soft);
-            color: var(--text-muted);
+            border: 1px solid var(--brand-primary);
+            background-color: transparent;
+            color: var(--brand-primary);
             cursor: pointer;
             transition: all var(--transition-fast);
         }
         .btn-export:hover {
-            background-color: var(--stroke);
-            color: var(--text-strong);
+            background-color: rgba(0, 190, 255, 0.1);
+            color: var(--brand-primary);
         }
         
         .results-grid {
@@ -235,7 +297,6 @@
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             line-height: 1;
             font-weight: 700;
-            text-transform: uppercase;
             background: linear-gradient(90deg, var(--brand-accent), var(--brand-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -246,6 +307,7 @@
             text-transform: uppercase;
             display: block;
             margin-bottom: var(--space-xs);
+            color: var(--text-muted);
         }
         .result-item .description {
             font-size: 0.8rem;
@@ -253,6 +315,7 @@
             line-height: 1.5;
         }
         
+        /* Análise Financeira ATUALIZADA (dark mode) */
         .financial-analysis {
             background-color: var(--bg-soft);
             border-radius: var(--border-radius-md);
@@ -270,6 +333,7 @@
         }
         .analysis-row .label {
             font-weight: 500;
+            color: var(--text-light); /* Cor atualizada */
         }
         .analysis-row .label .description {
             font-size: 0.8rem;
@@ -282,6 +346,7 @@
             font-family: var(--font-heading);
             font-size: 1.2rem;
             font-weight: 700;
+            color: var(--text-light); /* Cor atualizada */
         }
         .analysis-row.total {
             border-top: 2px solid var(--text-strong);
@@ -293,16 +358,16 @@
             color: var(--text-strong);
         }
 
-        
+        /* Cartão de Economia Líquida ATUALIZADO */
         .net-savings-card {
             background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
-            color: white;
+            color: #1E293B; /* Texto escuro para contraste */
             padding: var(--space-lg);
             border-radius: var(--border-radius-md);
             text-align: center;
         }
-        .net-savings-card h3 { color: white; }
-        .net-savings-card .value { font-size: 3rem; font-weight: 700; font-family: var(--font-heading); text-transform: uppercase; }
+        .net-savings-card h3 { color: #1E293B; }
+        .net-savings-card .value { font-size: 3rem; font-weight: 700; font-family: var(--font-heading); color: #1E293B; }
 
         .disclaimers {
             margin-top: var(--space-lg);
@@ -315,8 +380,10 @@
         }
         .disclaimers p { margin-bottom: var(--space-xs); }
         
+        /* Seção de Regras ATUALIZADA */
         .rules-container {
             margin-top: var(--space-xl);
+            text-align: center;
         }
         #rules-toggle {
             background: none;
@@ -324,17 +391,10 @@
             color: var(--text-muted);
             font-weight: 700;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: var(--space-xs);
-            font-size: 1rem;
-            font-family: var(--font-heading);
-            text-transform: uppercase;
-            padding: var(--space-sm);
-            width: 100%;
-            justify-content: center;
-            border: 1px dashed var(--stroke);
-            border-radius: var(--border-radius-sm);
+            font-size: 0.9rem;
         }
         #rules-toggle .material-symbols-outlined {
             transition: transform var(--transition-fast);
@@ -342,32 +402,52 @@
         #rules-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out, margin 0.5s ease-out;
-            background-color: var(--bg-page);
-            border-radius: var(--border-radius-md);
-            padding: 0 var(--space-lg);
-            margin-top: 0;
+            transition: max-height 0.5s ease-out;
+            text-align: left;
+            background-color: var(--bg-soft);
+            border-radius: var(--border-radius-sm);
+            padding: 0 var(--space-md);
+            margin-top: var(--space-md);
             font-size: 0.9rem;
             line-height: 1.8;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--stroke);
         }
         #rules-content.visible {
-            max-height: 2000px; 
-            padding: var(--space-lg);
-            margin-top: var(--space-md);
+            max-height: 2000px; /* Adjust if content is longer */
+            padding: var(--space-md);
         }
-        #rules-content h4 { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-sm); color: var(--text-strong); }
-        #rules-content ul { padding-left: 20px; }
-        #rules-content li { margin-bottom: var(--space-sm); }
-        #rules-content .capacity-table { font-size: 0.9rem; }
-
+        #rules-content h4 { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-xs); color: var(--text-strong); }
+        #rules-content ul { list-style-position: inside; padding-left: 0; }
+        #rules-content a { color: var(--brand-primary); text-decoration: none; font-weight: 500;}
+        #rules-content a:hover { text-decoration: underline; }
+        #rules-content code {
+            background-color: rgba(0,0,0,0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--text-light);
+        }
+        
+        .rules-header-flex { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
 
         .site-footer {
              padding: var(--space-sm) 0 var(--space-md) 0;
              text-align: center;
              font-size: 0.9rem;
-             color: var(--text-muted);
+             color: #64748b; /* slate-500 */
+             margin-top: auto;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+        }
+         .site-footer p {
+             line-height: 1; 
+             margin: 0; 
         }
 
         #render-container { position: absolute; left: -9999px; top: 0; background: white; z-index: -1; }
@@ -377,80 +457,163 @@
 
     <header class="site-header">
         <div class="header-container">
-            <a href="#"><img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" class="logo"></a>
+            <!-- LOGO BRANCO -->
+            <a href="#" class="logo"><img src="https://storage.googleapis.com/etp-bucket/Logos%20Xertica.ai%20%28.png%29/xertica.ai/Copy%20of%20Logo_XERTICA_white.png" alt="Logo Xertica.ai"></a>
         </div>
     </header>
 
     <main>
         <div class="container">
             <div class="calculator-card">
-                 <!-- TÍTULO ATUALIZADO -->
+                <!-- TÍTULO ATUALIZADO -->
                 <h1>Calculadora de ROI para o Governo</h1>
                 <p class="subtitle">Quantifique o retorno financeiro do seu investimento em IA, transformando economia de tempo em resultados concretos para sua operação.</p>
 
                 <div id="calculator-inputs">
-                     <h2 class="form-title">DADOS DO RELATÓRIO</h2>
-                     <div class="input-grid">
-                         <div class="input-group">
-                             <label for="client_name">Nome do Cliente</label>
-                             <input type="text" id="client_name" placeholder="Ex: João Silva">
-                         </div>
-                         <div class="input-group">
-                              <label for="client_company">Órgão / Empresa</label>
-                              <!-- PLACEHOLDER ATUALIZADO -->
-                             <input type="text" id="client_company" placeholder="Ex: Prefeitura de SP">
-                         </div>
-                         <div class="input-group">
-                             <label for="seller_name">Consultor Xertica.ai</label>
-                             <input type="text" id="seller_name" placeholder="Seu nome">
-                         </div>
-                     </div>
+                         <h2 class="form-title">Dados do Relatório</h2>
+                         <div class="input-grid">
+                             <div class="input-group">
+                                 <label for="client_name">Nome do Cliente</label>
+                                 <input type="text" id="client_name" placeholder="Ex: João Silva">
+                             </div>
+                             <div class="input-group">
+                                  <label for="client_company">Órgão / Empresa</label>
+                                 <input type="text" id="client_company" placeholder="Ex: Prefeitura de SP">
+                             </div>
+                             <div class="input-group">
+                                 <label for="seller_name">Consultor Xertica.ai</label>
+                                 <input type="text" id="seller_name" placeholder="Seu nome">
+                             </div>
+                        </div>
 
-                     <h2 class="form-title">1. DADOS FINANCEIROS E DE ATIVIDADE</h2>
-                     <div class="input-grid">
-                         <div class="input-group">
-                             <label for="custo_servidor">Custo Mensal por Colaborador (R$)</label>
-                             <input type="number" id="custo_servidor" placeholder="Salário + Encargos">
-                         </div>
-                         <div class="input-group">
-                             <label for="numero_servidores">Quantidade de Colaboradores</label>
-                             <input type="number" id="numero_servidores" placeholder="Nº de pessoas nas tarefas">
-                         </div>
-                         <div class="input-group">
-                             <label for="investimento_ia">Valor do Investimento em IA (Anual)</label>
-                             <input type="number" id="investimento_ia" placeholder="Ex: 50000">
-                         </div>
-                     </div>
+                         <h2 class="form-title">1. Dados Financeiros e de Atividade</h2>
+                         <!-- ***** CAMPOS FINANCEIROS ATUALIZADOS ***** -->
+                         <div class="input-grid">
+                             <div class="input-group">
+                                 <label for="custo_servidor">Custo Mensal por Colaborador (R$)</label>
+                                 <input type="number" id="custo_servidor" placeholder="Salário + Encargos">
+                             </div>
+                             <div class="input-group">
+                                 <label for="numero_servidores">Quantidade de Colaboradores</label>
+                                 <input type="number" id="numero_servidores" placeholder="Nº de pessoas nas tarefas">
+                             </div>
+                             <div class="input-group">
+                                <label for="custo_infra_atual">Custo Atual com Infraestrutura (R$ Anual) (Opcional)</label>
+                                <input type="number" id="custo_infra_atual" placeholder="Ex: 20000">
+                            </div>
+                        </div>
+                        
+                        <h2 class="form-title" style="border: none; margin-bottom: var(--space-md);">2. Investimento na Solução Xertica.ai</h2>
+                        <div class="input-grid">
+                             <div class="input-group">
+                                <label for="investimento_ia_ip">Investimento em IA (Prop. Intelectual) (R$ Anual)</albel>
+                                <input type="number" id="investimento_ia_ip" placeholder="Custo da licença/solução">
+                            </div>
+                             <div class="input-group">
+                                 <label for="investimento_ia_servicos">Investimento em Serviços (Time) (R$ Anual) (Opcional)</label>
+                                 <input type="number" id="investimento_ia_servicos" placeholder="Custo de implementação">
+                             </div>
+                             <div class="input-group">
+                                 <label for="investimento_ia_gcp">Investimento em Consumo GCP (R$ Anual) (Opcional)</label>
+                                 <input type="number" id="investimento_ia_gcp" placeholder="Custo de nuvem/API">
+                             </div>
+                        </div>
 
-                     <!-- SEÇÃO DE TAREFAS ATUALIZADA (GOVERNO) -->
-                     <h2 class="form-title">2. VOLUME MENSAL DE TAREFAS (TOTAL DA EQUIPE)</h2>
-                     <div class="input-grid">
-                        <div class="input-group">
-                            <label for="atendimentos">Atendimentos ao Cidadão por mês</label>
-                            <p class="input-description">Ex: Dúvidas por telefone, e-mail ou balcão sobre serviços e protocolos.</p>
-                            <input type="number" id="atendimentos" placeholder="Ex: 1000" min="0">
+
+                         <h2 class="form-title">3. Volume Mensal de Tarefas (Total da Equipe)</h2>
+                         <!-- ***** CAMPOS DE TAREFA ATUALIZADOS PARA GOVERNO (E PÁGINAS) ***** -->
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="atendimentos">Atendimentos ao Cidadão por mês</label>
+                                <p class="input-description">Ex: Dúvidas por telefone, e-mail ou balcão.</p>
+                                <input type="number" id="atendimentos" placeholder="Ex: 1000" min="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="analise_paginas">Páginas Analisadas por mês</label>
+                                <p class="input-description">Ex: Total de páginas lidas (contratos, editais).</p>
+                                <input type="number" id="analise_paginas" placeholder="Ex: 2000" min="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="geracao_paginas">Páginas Geradas por mês</label>
+                                <p class="input-description">Ex: Total de páginas emitidas (licenças, autos).</p>
+                                <input type="number" id="geracao_paginas" placeholder="Ex: 5000" min="0">
+                            </div>
+                             <div class="input-group">
+                                <label for="anonimizacao_paginas">Páginas Anonimizadas por mês (LGPD)</label>
+                                <p class="input-description">Ex: Total de páginas revisadas para remoção de dados.</p>
+                                <input type="number" id="anonimizacao_paginas" placeholder="Ex: 3000" min="0">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="analise_docs">Documentos Analisados por mês (Contratos)</label>
-                            <p class="input-description">Ex: Leitura de contratos, editais ou processos para extrair dados-chave.</p>
-                            <input type="number" id="analise_docs" placeholder="Ex: 200" min="0">
-                        </div>
-                        <div class="input-group">
-                            <label for="geracao_docs">Documentos Gerados por mês (Licenças, Autos)</label>
-                            <p class="input-description">Ex: Emissão de licenças, autos de infração, certidões ou ofícios.</p>
-                            <input type="number" id="geracao_docs" placeholder="Ex: 500" min="0">
-                        </div>
-                         <div class="input-group">
-                            <label for="anonimizacao_docs">Documentos Anonimizados por mês (LGPD)</label>
-                            <p class="input-description">Ex: Remoção manual de dados (CPF, RG) para publicação (LGPD).</p>
-                            <input type="number" id="anonimizacao_docs" placeholder="Ex: 300" min="0">
-                        </div>
-                     </div>
-                     <button id="calculate-btn" class="btn">Calcular ROI</button>
-                     <div id="roi-warning"></div>
+                        
+                        <!-- ***** SEÇÃO DE PREMISSAS (GOVERNO) ***** -->
+                        <h2 class="form-title" style="margin-top: var(--space-xl);">4. Premissas de Cálculo (Editável)</h2>
+                        <p class="subtitle" style="font-size: 1rem; margin-bottom: var(--space-lg); max-width: 100%; text-align: left;">
+                            Ajuste os tempos médios (em minutos) e as constantes de trabalho para refinar a simulação.
+                        </p>
+                        
+                        <div id="premissas-container">
+                            <div class="input-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md);">
+                                
+                                <div class="input-group">
+                                    <label>Atendimentos (Minutos)</label>
+                                    <div class="premissas-legend">
+                                        <span>Manual</span>
+                                        <span>IA</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <input type="number" id="manual_atendimento" value="15" title="Tempo Manual">
+                                        <input type="number" id="ia_atendimento" value="0" title="Tempo com IA">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Análise por Página (Minutos)</label>
+                                    <div class="premissas-legend">
+                                        <span>Manual</span>
+                                        <span>IA</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <input type="number" id="manual_analise_pagina" value="10" title="Tempo Manual">
+                                        <input type="number" id="ia_analise_pagina" value="2" title="Tempo com IA">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Geração por Página (Minutos)</label>
+                                    <div class="premissas-legend">
+                                        <span>Manual</span>
+                                        <span>IA</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <input type="number" id="manual_geracao_pagina" value="15" title="Tempo Manual">
+                                        <input type="number" id="ia_geracao_pagina" value="3" title="Tempo com IA">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Anonim. por Página (Minutos)</label>
+                                    <div class="premissas-legend">
+                                        <span>Manual</span>
+                                        <span>IA</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <input type="number" id="manual_anonimizacao_pagina" value="5" title="Tempo Manual">
+                                        <input type="number" id="ia_anonimizacao_pagina" value="1" title="Tempo com IA">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Dias Úteis / Ano</label>
+                                    <input type="number" id="dias_uteis_ano" value="252">
+                                </div>
+                                <div class="input-group">
+                                    <label>Horas de Trabalho / Dia</label>
+                                    <input type="number" id="horas_dia" value="8">
+                                </div>
+
+                            </div> <!-- Fim do input-grid das premissas -->
+                        </div> <!-- Fim do premissas-container -->
+
+                        <button id="calculate-btn" class="btn">Calcular ROI</button>
+                        <div id="roi-warning"></div>
                 </div>
 
-                <!-- SEÇÃO DE RESULTADOS (LABELS ATUALIZADOS PARA LÍQUIDO) -->
                 <div id="results-section">
                     <div class="results-header">
                         <h2 id="results-title">Relatório de Retorno Sobre Investimento (ROI)</h2>
@@ -483,35 +646,35 @@
                         </div>
                     </div>
 
-                     <h3 style="text-align:center; margin-bottom: var(--space-md);">ANÁLISE FINANCEIRA DO 1º ANO</h3>
-                     <div class="financial-analysis">
-                         <div class="analysis-row">
+                    <h3 style="text-align:center; margin-bottom: var(--space-md);">Análise Financeira do 1º Ano</h3>
+                    <div class="financial-analysis">
+                        <div class="analysis-row">
+                            <div class="label">
+                                Custo Operacional Atual
+                                <span class="description">(Custo anual: Mão de Obra + Infraestrutura Atual)</span>
+                            </div>
+                            <span class="value" id="current-cost-value">R$ 0,00</span>
+                        </div>
+                        <div class="analysis-row">
                              <div class="label">
-                                 Custo Operacional Atual
-                                 <span class="description">(Custo anual estimado das horas manuais)</span>
-                             </div>
-                             <span class="value" id="current-cost-value">R$ 0,00</span>
-                         </div>
-                         <div class="analysis-row">
-                              <div class="label">
-                                 <span class="material-symbols-outlined" style="color: var(--brand-primary);">remove</span>
+                                 <span class="material-symbols-outlined" style="color: var(--brand-primary); vertical-align: middle; font-size: 1.2rem;">remove</span>
                                  Economia Anual com IA
-                                 <span class="description">(Valor anual economizado com automação)</span>
-                             </div>
-                             <span class="value" id="savings-value">R$ 0,00</span>
-                         </div>
-                         <div class="analysis-row">
-                             <div class="label">
-                                 <span class="material-symbols-outlined" style="color: var(--brand-accent);">add</span>
+                                 <span class="description">(Valor anual economizado em Mão de Obra)</span>
+                            </div>
+                            <span class="value" id="savings-value">R$ 0,00</span>
+                        </div>
+                        <div class="analysis-row">
+                            <div class="label">
+                                 <span class="material-symbols-outlined" style="color: var(--brand-accent); vertical-align: middle; font-size: 1.2rem;">add</span>
                                  Investimento em IA
-                                 <span class="description">(Custo da solução no 1º ano)</span>
-                             </div>
-                             <span class="value" id="investment-value">R$ 0,00</span>
-                         </div>
-                         <div class="analysis-row total">
-                             <span class="label">Novo Custo Operacional (Anual)</span>
-                             <span class="value" id="new-cost-value">R$ 0,00</span>
-                         </div>
+                                 <span class="description">(Custo total da solução: IP + Serviços + GCP)</span>
+                            </div>
+                            <span class="value" id="investment-value">R$ 0,00</span>
+                        </div>
+                        <div class="analysis-row total">
+                            <span class="label">Novo Custo Operacional (Anual)</span>
+                            <span class="value" id="new-cost-value">R$ 0,00</span>
+                        </div>
                     </div>
 
                     <div class="net-savings-card">
@@ -519,85 +682,63 @@
                          <span class="value" id="net-savings-value">R$ 0,00</span>
                     </div>
 
-                     <div class="disclaimers">
+                    <div class="disclaimers">
                          <p><strong>*Disclaimer:</strong> Esta calculadora oferece estimativas baseadas nos dados fornecidos e na metodologia da Xertica.ai. Os resultados não são uma garantia e podem variar. Para uma análise detalhada e personalizada, consulte seu consultor Xertica.ai.</p>
                          <p><strong>**Nota sobre ROI:</strong> O cálculo de ROI apresentado não inclui custos indiretos como consumo de infraestrutura tecnológica do cliente ou outros fatores externos que podem impactar o custo total.</p>
-                     </div>
+                    </div>
                 </div>
                 
-                <!-- SEÇÃO DE REGRAS ATUALIZADA (GOVERNO) -->
                  <div class="rules-container">
-                     <button id="rules-toggle">
-                         <span>Entenda o Cálculo</span>
-                         <span class="material-symbols-outlined">expand_more</span>
-                     </button>
-                     <div id="rules-content">
-                         <div class="results-header" style="margin-bottom: var(--space-md);">
+                    <div class="rules-header-flex"> 
+                        <button id="rules-toggle">
+                            <span>VER REGRAS DE CÁLCULO</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                    </div> 
+                    <div id="rules-content">
+                        <div class="results-header" style="margin-bottom: var(--space-md);">
                              <h3>Metodologia de Cálculo</h3>
-                             <button id="save-rules-png-btn" class="btn-export">
+                             <button id="save-rules-png-btn" class="btn-export" style="display: none;">
                                  <span class="material-symbols-outlined">image</span>
-                                 Baixar Regras como Imagem
+                                 Salvar Regras
                              </button>
                          </div>
-                         <p>A calculadora traduz a economia de tempo em um retorno financeiro claro, baseada em premissas realistas e na eficiência comprovada da nossa IA. Veja o passo a passo:</p>
-                         
-                         <h4>1. PREMISSAS DE TEMPO (MANUAL VS. IA)</h4>
-                         <p>Estes são os tempos médios que usamos como base para cada tarefa:</p>
-                          <!-- TABELA ATUALIZADA (GOVERNO) -->
-                         <table class="capacity-table" style="font-size: 0.9rem; margin-top: var(--space-sm);">
-                             <thead>
-                                 <tr>
-                                     <th>Tarefa</th>
-                                     <th>Tempo Manual Estimado</th>
-                                     <th>Tempo com IA Xertica.ai</th>
-                                 </tr>
-                             </thead>
-                             <tbody>
-                                 <tr>
-                                     <td>1 Atendimento ao Cidadão</td>
-                                     <td>15 minutos</td>
-                                     <td style="color: var(--brand-primary); font-weight: 700;">0 minutos (Autônomo)</td>
-                                 </tr>
-                                 <tr>
-                                     <td>1 Análise de Documento</td>
-                                     <td>1 hora (60 min)</td>
-                                     <td style="color: var(--brand-primary); font-weight: 700;">6 minutos</td>
-                                 </tr>
-                                 <tr>
-                                     <td>1 Geração de Documento</td>
-                                     <td>45 minutos</td>
-                                     <td style="color: var(--brand-primary); font-weight: 700;">4 minutos</td>
-                                 </tr>
-                                 <tr>
-                                     <td>1 Anonimização de Documento</td>
-                                     <td>20 minutos</td>
-                                     <td style="color: var(--brand-primary); font-weight: 700;">1 minuto</td>
-                                 </tr>
-                             </tbody>
-                         </table>
+                        <p>A calculadora traduz a economia de tempo em um retorno financeiro claro, baseada em premissas realistas e na eficiência comprovada da nossa IA. Veja o passo a passo:</p>
+                        
+                        <h4>1. PREMISSAS E CONSTANTES INTERNAS</h4>
+                        <p>Os cálculos são baseados nas médias de mercado e na eficiência das ferramentas Xertica.ai, conforme definido nos campos da seção "Premissas de Cálculo".</p>
+                        <ul>
+                            <li><b>TEMPOS MANUAIS (POR UNIDADE):</b> O tempo (em minutos) que sua equipe gasta hoje em cada tarefa (Ex: por atendimento, por página analisada).</li>
+                            <li><b>TEMPOS COM IA (POR UNIDADE):</b> O tempo médio (em minutos) gasto para realizar a mesma tarefa com assistência da IA.</li>
+                             <li><b>CONSTANTES DE TRABALHO:</b> O total de dias úteis por ano e horas de trabalho por dia.</li>
+                        </ul>
+                        <h4>2. CÁLCULO DA ECONOMIA DE TEMPO E CUSTO</h4>
+                        <ul>
+                            <li><b>HORAS DE TRABALHO (MÊS):</b> (<code>Dias Úteis / Ano</code> * <code>Horas / Dia</code>) / 12.</li>
+                            <li><b>CUSTO DA HORA DE TRABALHO:</b> <code>Custo Mensal por Colaborador</code> / <code>Horas de Trabalho (Mês)</code>.</li>
+                            <li><b>HORAS ECONOMIZADAS (MÊS):</b> (<code>Tempo Manual Total</code> - <code>Tempo com IA Total</code>) / 60.</li>
+                        </ul>
+                        
+                        <h4>3. CÁLCULO DO IMPACTO FINANCEIRO</h4>
+                        <p>A lógica financeira considera tanto os custos atuais (Mão de Obra + Infra) quanto os novos custos (Solução Xertica.ai).</p>
+                        <ul>
+                            <li><b>Economia de Mão de Obra (Anual):</b> É o valor das horas de trabalho economizadas. (<code>Horas Economizadas (Mês)</code> * <code>Custo da Hora</code> * 12).</li>
+                            <li><b>Economia de Infra (Anual):</b> É o <code>Custo Atual com Infraestrutura</code> que será descontinuado.</li>
+                            <li><b>Economia Bruta Total (Anual):</b> É a soma de tudo que o cliente deixa de gastar. (<code>Economia de Mão de Obra</code> + <code>Economia de Infra</code>).</li>
+                            <li><b>Investimento Total (Anual):</b> É o custo total da nova solução. (<code>Propriedade Intelectual</code> + <code>Serviços</code> + <code>Consumo GCP</code>).</li>
+                            <li><b>Economia Líquida (1º Ano):</b> É o lucro real da operação. (<code>Economia Bruta Total</code> - <code>Investimento Total</code>).</li>
+                        </ul>
 
-                         <h4>2. CÁLCULO DA ECONOMIA DE TEMPO E CUSTO</h4>
-                         <ul>
-                             <li><b>Custo da Hora de Trabalho:</b> Dividimos o <code>Custo Mensal por Colaborador</code> por <code>168</code> (média de horas úteis no mês) para encontrar o valor de uma hora.</li>
-                             <li><b>Horas Manuais Gastas:</b> Multiplicamos o volume de cada tarefa que você inseriu pelo seu respectivo tempo manual. A soma de tudo nos dá o total de horas que sua equipe gasta hoje.</li>
-                             <li><b>Horas Economizadas com IA:</b> Calculamos o tempo total que seria gasto com IA e subtraímos do tempo manual total. O resultado é a quantidade de horas que sua equipe "ganha de volta" todo mês.</li>
-                         </ul>
-
-                         <h4>3. CÁLCULO DO IMPACTO FINANCEIRO</h4>
-                         <ul>
-                             <!-- ATUALIZADO PARA ECONOMIA BRUTA -->
-                             <li><b>Economia Anual Bruta (R$):</b> Convertemos as horas economizadas em valor financeiro (<code>Total de Horas Economizadas no Mês * Custo da Hora * 12</code>).</li>
-                              <li><b>Custo Operacional Atual:</b> É o custo anual estimado para realizar o volume de tarefas informado de forma manual (<code>Total de Horas Manuais no Mês * Custo da Hora * 12</code>).</li>
-                              <li><b>Economia Líquida (1º Ano):</b> É o lucro real após subtrair o investimento da economia gerada (<code>Economia Anual Bruta - Investimento em IA</code>).</li>
-                         </ul>
-
-                         <h4>4. MÉTRICAS DE INVESTIMENTO</h4>
-                         <ul>
-                             <li><b>ROI (Retorno Sobre o Investimento):</b> Mostra o retorno <strong>líquido</strong> sobre o valor investido no primeiro ano (<code>(Economia Líquida / Investimento) * 100</code>).</li>
-                             <li><b>Payback (Meses):</b> Indica em quantos meses o investimento se paga com a economia mensal <strong>bruta</strong> gerada (<code>Investimento / (Economia Anual Bruta / 12)</code>).</li>
-                         </ul>
-                     </div>
-                 </div>
+                        <h4>4. MÉTRICAS DE INVESTIMENTO</h4>
+                        <p>As métricas-chave são calculadas da seguinte forma:</p>
+                        <ul>
+                            <li><b>ROI (Retorno Sobre o Investimento):</b> Mostra o ganho líquido sobre o custo. (<code>Economia Líquida / Investimento Total</code>) * 100.</li>
+                            <li><b>PAYBACK (MESES):</b> Mostra quando o investimento se paga. <code>Investimento Total / (Economia Bruta Total / 12)</code>.</li>
+                        </ul>
+                        
+                        <!-- Seção de Fontes REMOVIDA -->
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -608,7 +749,7 @@
 
     <div id="render-container"></div>
 
-    <!-- SCRIPT ATUALIZADO (GOVERNO + LÓGICA ROI CORRIGIDA) -->
+    <!-- SCRIPT ATUALIZADO (GOVERNO + LÓGICA DE PÁGINAS + LÓGICA DE CUSTOS) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const calculateBtn = document.getElementById('calculate-btn');
@@ -621,65 +762,100 @@
             
             const allInputs = document.querySelectorAll('#calculator-inputs input');
 
-            // PREMISSAS ATUALIZADAS (GOVERNO)
-            const temposManuais = { atendimento: 15, analise: 60, geracao: 45, anonimizacao: 20 };
-            const temposIA = { atendimento: 0, analise: 6, geracao: 4, anonimizacao: 1 };
-            const HORAS_TRABALHO_MES = 168;
-
+            // Funções de formatação
             const formatCurrency = (num) => `R$ ${num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             const formatPercent = (num) => `${num.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}%`;
             const formatMonths = (num) => num > 0 ? `${num.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}` : 'N/A';
+            const formatInt = (num) => {
+                if (num === Infinity) return '∞';
+                return Math.floor(num).toLocaleString('pt-BR');
+            };
 
             function calculateAndDisplay() {
-                const custoServidor = Number(document.getElementById('custo_servidor').value) || 0;
-                const investimentoIA = Number(document.getElementById('investimento_ia').value) || 0;
                 
-                // IDs DAS TAREFAS ATUALIZADOS (GOVERNO)
+                // ***** LEITURA DAS PREMISSAS EDITÁVEIS *****
+                const diasUteisAno = Number(document.getElementById('dias_uteis_ano').value) || 252;
+                const horasTrabalhoDia = Number(document.getElementById('horas_dia').value) || 8;
+                const HORAS_TRABALHO_MES = (diasUteisAno / 12) * horasTrabalhoDia; 
+
+                const temposManuais = {
+                    atendimento: Number(document.getElementById('manual_atendimento').value) || 15,
+                    analise_pagina: Number(document.getElementById('manual_analise_pagina').value) || 10, 
+                    geracao_pagina: Number(document.getElementById('manual_geracao_pagina').value) || 15,
+                    anonimizacao_pagina: Number(document.getElementById('manual_anonimizacao_pagina').value) || 5
+                };
+                
+                const temposIA = {
+                    atendimento: Number(document.getElementById('ia_atendimento').value) || 0,
+                    analise_pagina: Number(document.getElementById('ia_analise_pagina').value) || 2, 
+                    geracao_pagina: Number(document.getElementById('ia_geracao_pagina').value) || 3,
+                    anonimizacao_pagina: Number(document.getElementById('ia_anonimizacao_pagina').value) || 1
+                };
+                
+                // ***** LEITURA DOS NOVOS INPUTS FINANCEIROS *****
+                const custoServidor = Number(document.getElementById('custo_servidor').value) || 0;
+                const custoInfraAtual = Number(document.getElementById('custo_infra_atual').value) || 0; 
+                
+                const investimentoIP = Number(document.getElementById('investimento_ia_ip').value) || 0; 
+                const investimentoServicos = Number(document.getElementById('investimento_ia_servicos').value) || 0; 
+                const investimentoGCP = Number(document.getElementById('investimento_ia_gcp').value) || 0; 
+                
+                const investimentoIA = investimentoIP + investimentoServicos + investimentoGCP; 
+                
                 const qtdTarefas = {
                     atendimento: Number(document.getElementById('atendimentos').value) || 0,
-                    analise: Number(document.getElementById('analise_docs').value) || 0,
-                    geracao: Number(document.getElementById('geracao_docs').value) || 0,
-                    anonimizacao: Number(document.getElementById('anonimizacao_docs').value) || 0,
+                    analise_pagina: Number(document.getElementById('analise_paginas').value) || 0, 
+                    geracao_pagina: Number(document.getElementById('geracao_paginas').value) || 0,
+                    anonimizacao_pagina: Number(document.getElementById('anonimizacao_paginas').value) || 0,
                 };
 
-                const custoHora = custoServidor > 0 ? custoServidor / HORAS_TRABALHO_MES : 0;
+                const custoHora = custoServidor > 0 && HORAS_TRABALHO_MES > 0 ? custoServidor / HORAS_TRABALHO_MES : 0;
                 
-                // LÓGICA DE CÁLCULO ATUALIZADA (GOVERNO)
-                const totalMinutosManuaisMes = (qtdTarefas.atendimento * temposManuais.atendimento) + (qtdTarefas.analise * temposManuais.analise) + (qtdTarefas.geracao * temposManuais.geracao) + (qtdTarefas.anonimizacao * temposManuais.anonimizacao);
-                const totalMinutosIAMes = (qtdTarefas.atendimento * temposIA.atendimento) + (qtdTarefas.analise * temposIA.analise) + (qtdTarefas.geracao * temposIA.geracao) + (qtdTarefas.anonimizacao * temposIA.anonimizacao);
+                const totalMinutosManuaisMes = (qtdTarefas.atendimento * temposManuais.atendimento) + (qtdTarefas.analise_pagina * temposManuais.analise_pagina) + (qtdTarefas.geracao_pagina * temposManuais.geracao_pagina) + (qtdTarefas.anonimizacao_pagina * temposManuais.anonimizacao_pagina);
+                const totalMinutosIAMes = (qtdTarefas.atendimento * temposIA.atendimento) + (qtdTarefas.analise_pagina * temposIA.analise_pagina) + (qtdTarefas.geracao_pagina * temposIA.geracao_pagina) + (qtdTarefas.anonimizacao_pagina * temposIA.anonimizacao_pagina);
 
                 const horasManuaisTotaisMes = totalMinutosManuaisMes / 60;
                 const horasEconomizadasMes = (totalMinutosManuaisMes - totalMinutosIAMes) / 60;
                 
-                const custoOperacionalAnual = (horasManuaisTotaisMes * custoHora) * 12;
-                // --- CÁLCULOS FINANCEIROS CORRIGIDOS ---
-                const economiaMensalBruta = horasEconomizadasMes * custoHora;
-                const economiaAnualBruta = economiaMensalBruta * 12;
-
-                const economiaLiquidaAnual = economiaAnualBruta - investimentoIA;
-                const economiaMensalLiquida = economiaLiquidaAnual / 12;
+                // Custo de mão de obra (Base para Economia)
+                const custoMaoDeObraAtualAnual = (horasManuaisTotaisMes * custoHora) * 12;
+                const custoMaoDeObraIAAnual = ((totalMinutosIAMes / 60) * custoHora) * 12;
                 
-                const payback = economiaMensalBruta > 0 ? investimentoIA / economiaMensalBruta : 0; 
-                const roi = investimentoIA > 0 ? (economiaLiquidaAnual / investimentoIA) * 100 : 0;
-                // --- FIM DA CORREÇÃO ---
-
-                const novoCustoOperacional = (custoOperacionalAnual - economiaAnualBruta) + investimentoIA;
+                // Custo Operacional Atual (Total) = Mão de Obra + Infra
+                const custoOperacionalAnual = custoMaoDeObraAtualAnual + custoInfraAtual; 
+                
+                // Economia (Saving) = Apenas a economia de Mão de Obra
+                const economiaAnual = horasEconomizadasMes * custoHora * 12; 
+                
+                // Economia Líquida (Total) = (O que economizou de horas + O que economizou de infra) - O que gastou de IA
+                const economiaLiquida = (economiaAnual + custoInfraAtual) - investimentoIA; 
+                const economiaMensalLiquida = economiaLiquida / 12; 
+                
+                // Economia Bruta Mensal (para Payback) = (Economia de horas + Economia de infra) / 12
+                const economiaBrutaMensal = (economiaAnual + custoInfraAtual) / 12;
+                
+                const payback = economiaBrutaMensal > 0 ? investimentoIA / economiaBrutaMensal : 0; 
+                const roi = investimentoIA > 0 ? (economiaLiquida / investimentoIA) * 100 : 0;
+                
+                // Novo Custo (Total) = Custo da Mão de Obra reduzida + Custo do Investimento IA
+                const novoCustoOperacional = custoMaoDeObraIAAnual + investimentoIA;
+                
                 
                 // --- ATUALIZAÇÃO DO DISPLAY ---
                 document.getElementById('economia-mes').textContent = formatCurrency(economiaMensalLiquida);
-                document.getElementById('economia-ano').textContent = formatCurrency(economiaLiquidaAnual);
+                document.getElementById('economia-ano').textContent = formatCurrency(economiaLiquida);
                 document.getElementById('roi').textContent = formatPercent(roi);
                 document.getElementById('payback').textContent = formatMonths(payback);
 
                 document.getElementById('current-cost-value').textContent = formatCurrency(custoOperacionalAnual);
-                document.getElementById('savings-value').textContent = formatCurrency(economiaAnualBruta);
-                document.getElementById('investment-value').textContent = formatCurrency(investimentoIA);
+                document.getElementById('savings-value').textContent = formatCurrency(economiaAnual); // Mostra SÓ a economia de horas
+                document.getElementById('investment-value').textContent = formatCurrency(investimentoIA); // Mostra o investimento total
                 document.getElementById('new-cost-value').textContent = formatCurrency(novoCustoOperacional);
-                document.getElementById('net-savings-value').textContent = formatCurrency(economiaLiquidaAnual); 
+                document.getElementById('net-savings-value').textContent = formatCurrency(economiaLiquida);
 
                 if (payback > 12 && investimentoIA > 0) {
                     roiWarning.style.display = 'block';
-                    roiWarning.innerHTML = `<strong>ATENÇÃO:</strong> O payback (retorno) do investimento ocorrerá em mais de 12 meses (<code>${formatMonths(payback)} meses</code>). O ROI de <strong style="color: #000;">${formatPercent(roi)}</strong> representa o retorno líquido já no primeiro ano.`;
+                    roiWarning.innerHTML = `<strong>Atenção:</strong> O payback (retorno) do investimento ocorrerá em mais de 12 meses (<code>${formatMonths(payback)} meses</code>). O ROI de <strong style="color: var(--text-strong);">${formatPercent(roi)}</strong> representa o retorno líquido já no primeiro ano.`;
                 } else {
                     roiWarning.style.display = 'none';
                 }
@@ -694,15 +870,16 @@
                 }, 10);
             });
 
+            // Re-calcula em tempo real
             allInputs.forEach(input => {
                 input.addEventListener('input', () => {
-                    if (resultsSection.style.display === 'block') {
+                     if (resultsSection.style.display === 'block') {
                         calculateAndDisplay();
-                    }
+                     }
                 });
             });
             
-            // --- FUNÇÕES PARA GERAR IMAGEM ---
+            // Função para gerar o HTML do relatório para PNG (CORES CORRIGIDAS)
             function generateReportHTML() {
                 const clientName = document.getElementById('client_name').value || 'Cliente';
                 const clientCompany = document.getElementById('client_company').value || 'Empresa';
@@ -710,37 +887,39 @@
                 const reportDate = new Date().toLocaleDateString('pt-BR');
                 
                 const resultsClone = document.getElementById('results-section').cloneNode(true);
-                const exportButton = resultsClone.querySelector('.btn-export');
-                if (exportButton) exportButton.remove();
+                resultsClone.querySelector('.btn-export').remove();
 
                 const reportHTML = `
                     <div style="padding: 40px; font-family: 'Roboto', sans-serif; color: #393232; width: 8.5in; background: white;">
-                        <style>
-                             h1, h2, h3 { font-family: 'Space Mono', monospace; text-transform: uppercase; color: #1E1E1E; }
-                            .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-                            .result-item { background-color: #F6F8FA; padding: 15px; border-radius: 8px; text-align: center; }
-                            .result-item .value { font-family: 'Space Mono', monospace; font-size: 28px; font-weight: 700; background: linear-gradient(90deg, #FF00F3, #00C0FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-                            .result-item .label { font-size: 10px; font-weight: 700; text-transform: uppercase; }
-                            .result-item .description { font-size: 10px; color: #595959; line-height: 1.4; margin-top: 5px; }
-                            .financial-analysis { background-color: #F6F8FA; border-radius: 16px; padding: 24px; }
-                            .analysis-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
-                            .analysis-row:not(:last-child) { border-bottom: 1px dashed #E6E8EB; }
-                            .analysis-row .label { font-weight: 500; font-size: 14px;}
-                            .analysis-row .label .description { font-size: 10px; color: #595959; display: block; font-weight: 400; text-transform: none; }
-                            .analysis-row .value { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; }
-                            .analysis-row.total { border-top: 2px solid #1E1E1E; margin-top: 8px; }
-                            .analysis-row.total .label, .analysis-row.total .value { font-size: 14px; font-weight: 700; color: #1E1E1E; }
-                            .net-savings-card { background: linear-gradient(135deg, #00C0FF, #FF00F3); color: white; padding: 20px; border-radius: 16px; text-align: center; margin-top: 20px;}
-                            .net-savings-card h3 { color: white; }
-                            .net-savings-card .value { font-size: 32px; font-weight: 700; font-family: 'Space Mono', monospace; text-transform: uppercase; }
-                            .disclaimers { margin-top: 30px; padding-top: 15px; border-top: 1px solid #E6E8EB; font-size: 10px; color: #595959; line-height: 1.5; text-align: center; }
-                            .disclaimers p { margin-bottom: 5px; }
-                        </style>
+                         <style>
+                             h1, h2, h3 { font-family: 'Poppins', sans-serif; color: #1E1E1E; }
+                             .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+                             .result-item { background-color: #F6F8FA; padding: 15px; border-radius: 8px; text-align: center; }
+                             /* COR DO PNG CORRIGIDA (azul escuro) */
+                             .result-item .value { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--brand-primary-dark, #047EA9); }
+                             .result-item .label { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+                             .result-item .description { font-size: 10px; color: #595959; line-height: 1.4; margin-top: 5px; }
+                             .financial-analysis { background-color: #F6F8FA; border-radius: 16px; padding: 24px; }
+                             .analysis-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+                             .analysis-row:not(:last-child) { border-bottom: 1px dashed #E6E8EB; }
+                             /* ***** CORRIGIDO: Adicionando cor escura para os labels e valores da análise financeira ***** */
+                             .analysis-row .label { font-weight: 500; font-size: 14px; color: #393232; }
+                             .analysis-row .label .description { font-size: 10px; color: #595959; display: block; font-weight: 400; text-transform: none; }
+                             .analysis-row .value { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; color: #393232; }
+                             .analysis-row.total { border-top: 2px solid #1E1E1E; margin-top: 8px; }
+                             .analysis-row.total .label, .analysis-row.total .value { font-size: 14px; font-weight: 700; color: #1E1E1E; }
+                             .net-savings-card { background: linear-gradient(135deg, #00BEFF, #C0FF7D); color: #1E293B; padding: 20px; border-radius: 16px; text-align: center; margin-top: 20px;}
+                             .net-savings-card h3 { color: #1E293B; }
+                             .net-savings-card .value { font-size: 32px; font-weight: 700; font-family: 'Poppins', sans-serif; color: #1E293B; }
+                             .disclaimers { margin-top: 30px; padding-top: 15px; border-top: 1px solid #E6E8EB; font-size: 10px; color: #595959; line-height: 1.5; text-align: center; }
+                             .disclaimers p { margin-bottom: 5px; }
+                         </style>
                         <div style="text-align: center; margin-bottom: 30px;">
+                            <!-- LOGO CORRIGIDO PARA O PRETO -->
                             <img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" style="height: 30px;" crossorigin="anonymous">
                         </div>
                         <div style="text-align: center; border-bottom: 1px solid #E6E8EB; padding-bottom: 20px; margin-bottom: 20px;">
-                            <h1 style="font-size: 20px; margin: 0 0 8px 0;">RELATÓRIO DE RETORNO SOBRE INVESTIMENTO</h1>
+                            <h1 style="font-size: 20px; margin: 0 0 8px 0;">Relatório de Retorno Sobre Investimento (Governo)</h1>
                              <p style="font-size: 14px; margin: 0;">Preparado para: <strong>${clientName} (${clientCompany})</strong></p>
                             <p style="font-size: 12px; margin: 4px 0 0 0;">Consultor: ${sellerName} | Data: ${reportDate}</p>
                         </div>
@@ -763,61 +942,75 @@
                     const clientCompanyInput = document.getElementById('client_company');
                     const clientCompany = clientCompanyInput ? clientCompanyInput.value : 'xertica';
                     const link = document.createElement('a');
-                    // Nome do arquivo atualizado
                     link.download = `relatorio_roi_ia_governo_${clientCompany.replace(/\s+/g, '_')}.png`;
                     link.href = canvas.toDataURL('image/png');
                     link.click();
                 });
             });
 
+            // Função para gerar HTML das Regras para PNG
+            function generateRulesHTML() {
+                const rulesClone = document.getElementById('rules-content').cloneNode(true);
+                rulesClone.style.padding = '0'; 
+                rulesClone.style.marginTop = '0';
+                
+                const reportHTML = `
+                    <div style="padding: 40px; font-family: 'Roboto', sans-serif; color: #393232; width: 8.5in; background: white; text-align: left;">
+                         <style>
+                             h4 { font-family: 'Poppins', sans-serif; font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #1E1E1E; }
+                             p { font-size: 0.9rem; line-height: 1.8; margin: 0.5rem 0; }
+                             ul { list-style-position: inside; padding-left: 0; font-size: 0.9rem; line-height: 1.8; }
+                             li { margin-bottom: 0.5rem; }
+                             a { color: var(--brand-primary-dark, #047EA9); text-decoration: none; }
+                             code {
+                                background-color: #f4f4f5; /* zinc-100 */
+                                padding: 2px 6px;
+                                border-radius: 4px;
+                                font-family: monospace;
+                                color: #3f3f46; /* zinc-700 */
+                            }
+                         </style>
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <!-- LOGO CORRIGIDO PARA O PRETO -->
+                            <img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" style="height: 30px;" crossorigin="anonymous">
+                            <h2 style="font-family: 'Poppins', sans-serif; color: #1E1E1E; font-size: 20px; margin: 20px 0 0 0;">Regras de Cálculo da Simulação (ROI - Governo)</h2>
+                        </div>
+                        <div>
+                            ${rulesClone.innerHTML}
+                        </div>
+                        
+                        <div style="font-size: 10px; color: #393232; margin-top: 20px; border-top: 1px solid #E6E8EB; padding-top: 15px; text-align: left; line-height: 1.5;">
+                            <p>*Esta é uma simulação baseada no tempo médio gasto manually para a tarefa versus o tempo médio com IA, podendo variar conforme o caso de uso e a complexidade da tarefa.</p>
+                        </div>
+                    </div>
+                `;
+                return reportHTML;
+            }
+
+            // Salvar Regras como PNG
+            saveRulesPngBtn.addEventListener('click', () => {
+                const renderContainer = document.getElementById('render-container');
+                renderContainer.innerHTML = generateRulesHTML();
+                
+                const elementToCapture = renderContainer.firstElementChild;
+                
+                html2canvas(elementToCapture, { scale: 3, useCORS: true }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `regras_calculo_roi_governo.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+
+            // Toggle das Regras
             rulesToggle.addEventListener('click', () => {
                 rulesContent.classList.toggle('visible');
                 const icon = rulesToggle.querySelector('.material-symbols-outlined');
                 const isVisible = rulesContent.classList.contains('visible');
                 icon.textContent = isVisible ? 'expand_less' : 'expand_more';
                 icon.style.transform = isVisible ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-
-            saveRulesPngBtn.addEventListener('click', () => {
-                const rulesElement = document.getElementById('rules-content');
-                const rulesHTML = rulesElement.innerHTML;
-                
-                const reportHTML = `
-                    <div style="padding: 40px; font-family: 'Roboto', sans-serif; color: #393232; width: 8.5in; background: white; text-align: left;">
-                         <style>
-                             h3, h4 { font-family: 'Space Mono', monospace; text-transform: uppercase; color: #1E1E1E; }
-                            h4 { font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-                            p { font-size: 0.9rem; line-height: 1.8; margin: 0.5rem 0; }
-                            ul { list-style-position: inside; padding-left: 20px; font-size: 0.9rem; line-height: 1.8; }
-                            li { margin-bottom: 0.5rem; }
-                            .capacity-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem; }
-                            .capacity-table th, .capacity-table td { padding: 10px; border-bottom: 1px solid #E6E8EB; text-align: left;}
-                            .capacity-table thead tr { background: linear-gradient(90deg, #00C0FF, #FF00F3); color: white; font-family: 'Space Mono', monospace; }
-                            .results-header { display: flex; justify-content: space-between; align-items: center; }
-                         </style>
-                         <div style="text-align: center; margin-bottom: 30px;">
-                            <img src="https://cdn.prod.website-files.com/653ff55cffa885d43e1a7bfa/6672e8383dbaa6bd3e8e527c_logo-xerticaAi.png" alt="Logo Xertica.ai" style="height: 30px;" crossorigin="anonymous">
-                         </div>
-                         ${rulesHTML}
-                    </div>
-                `;
-                
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = reportHTML;
-                const btnToRemove = tempDiv.querySelector('.btn-export');
-                if (btnToRemove) btnToRemove.remove();
-
-                const renderContainer = document.getElementById('render-container');
-                renderContainer.innerHTML = tempDiv.innerHTML;
-                const elementToCapture = renderContainer.firstElementChild;
-                
-                html2canvas(elementToCapture, { scale: 3, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
-                    const link = document.createElement('a');
-                     // Nome do arquivo atualizado
-                    link.download = `regras_calculo_roi_governo.png`;
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
-                });
+                rulesToggle.querySelector('span').textContent = isVisible ? 'OCULTAR REGRAS DE CÁLCULO' : 'VER REGRAS DE CÁLCULO';
+                saveRulesPngBtn.style.display = isVisible ? 'inline-flex' : 'none'; 
             });
 
         });
